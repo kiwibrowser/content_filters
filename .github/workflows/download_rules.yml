@@ -1,8 +1,7 @@
-name: 'Main: Download rules from external sources'
+name: 'Main: Downloading rules from external sources'
 
 on:
   workflow_dispatch:
-    inputs:
 
 jobs:
   build:
@@ -19,5 +18,16 @@ jobs:
           git config --global user.email "github@actions"
           git config --global user.name "Repository manager"
           
-      - name: Listing files
-        run: ls -la
+      - name: Downloading global rules
+        run: |
+          while IFS= read -r line; do
+            if [[ $line != \#* ]]; then
+              host=$(echo "$line" | awk -F/ '{print $3}')
+              if [[ $host == "github.com" ]] || [[ $host == "raw.githubusercontent.com" ]]; then
+                  host=$(echo "$line" | awk -F/ '{print $4}')
+              fi
+              filename=$(basename "$line")
+              destfilename="downloaded_rules/global/"$host"_"$filename"
+              wget -O "$destfilename" "$line"
+            fi
+          done < rules/global.txt
