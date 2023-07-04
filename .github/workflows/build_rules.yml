@@ -24,6 +24,9 @@ jobs:
       - name: Creating output folder
         run: mkdir -p ./output/
 
+      - name: Adding executable permission to generation tools
+        run: chmod +x ./tools/ruleset_converter
+
       - name: Generate binary rules file
         run: ./tools/ruleset_converter --input_format=filter-list --output_format=unindexed-ruleset --input_files=./concatenated_rules.txt --output_file=./output/rules.dat
         
