@@ -1,0 +1,35 @@
+name: 'Build rules from downloaded rules'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setting-up GitHub username
+        run: |
+          git config --global user.email "github@actions"
+          git config --global user.name "Repository manager"
+        
+      - name: Generate concatenated rules file
+        run: find ./downloaded_rules -type f -exec cat {} + > ./concatenated_rules.txt
+
+      - name: Creating output folder
+        run: mkdir -p ./output/
+
+      - name: Generate binary rules file
+        run: ./tools/ruleset_converter --input_format=filter-list --output_format=unindexed-ruleset --input_files=./concatenated_rules.txt --output_file=./output/rules.dat
+        
+      - name: Pushing generated binary rules file
+        run: |
+          rm ./concatenated_rules.txt
+          git add ./output
+          git commit -a -m 'Update binary rules file'
+          git push
