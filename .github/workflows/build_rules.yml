@@ -17,6 +17,9 @@ jobs:
         run: |
           git config --global user.email "github@actions"
           git config --global user.name "Repository manager"
+      
+      - name: Installing crx3-utils
+        run: npm -i crx3-utils@0.0.3
         
       - name: Generate concatenated rules file
         run: find ./downloaded_rules -type f -exec cat {} + > ./concatenated_rules.txt
@@ -37,9 +40,14 @@ jobs:
         run: cat licenses/* > output/LICENSE
       
       - name: Generating component file
+        env:
+          # To generate a test key, use:
+          # openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out private.pem
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY_SIGNATURE }}
         run: |
           version=$(date +'%y.%j')
           filename="${version}_subresource_rules.crx3"
+          zip_filename="${version}_subresource_rules.zip"
           cat <<EOF > output/manifest.json
           {
             "manifest_version": 2,
@@ -51,7 +59,14 @@ jobs:
           EOF
           # Always generate the .zip file with the same metadata
           find output/ -exec touch -t 197001010000.00 {} \;
-          zip -rj "output/${filename}" output/*
+          zip -rj "output/${zip_filename}" output/*
+          echo "$PRIVATE_KEY" > /tmp/private.pem
+          crx3-new /tmp/private.pem < ${zip_filename} > ${filename}
+          rm -f /tmp/private.pem
+          if [ -f /tmp/private.pem ]; then
+            echo "Error: Failed to delete private.pem"
+            exit -1
+          fi
           filesize=$(stat -c%s "output/${filename}")
           sha256=$(shasum -a 256 "output/${filename}" | cut -f1 -d' ')
           sha1=$(python3 tools/generate_sha1_base64_signature.py "output/${filename}")
@@ -65,7 +80,7 @@ jobs:
           echo $sha256 > output/${filename}.sha256.sig
           echo $filesize > output/${filename}.filesize
           cd output && ln -s "${filename}" "latest.crx3" && cd ..
-          echo "// Configuration for the update server"
+          echo "  // Configuration for the update server"
           cat output/worker_configuration.js
 
       - name: Pushing generated binary rules file
