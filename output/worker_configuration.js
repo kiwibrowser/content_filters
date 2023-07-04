@@ -1,6 +1,6 @@
-  if (version_to_use == '23.7.4.772') {
-    sha256 = '5e4358491db475c0b68111f576beeb74d858fec0e3b413f6bf3f87f6641bd140';
-    sha1 = '+iTI9RAEVGKrSD7gqyndG0+lbfc=';
+  if (version_to_use == '23.7.4.774') {
+    sha256 = 'ac7370c47f40972ebf3ab09837afa9e664456044ba079f127c0be2e8c3e10081';
+    sha1 = 'xUKIvxyNt8JOfxDTUI6u+YdURJE=';
     filesize = '654526';
-    filename = '23.7.4.772_subresource_rules.crx3';
+    filename = '23.7.4.774_subresource_rules.crx3';
   }
