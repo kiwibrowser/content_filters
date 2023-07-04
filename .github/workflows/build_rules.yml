@@ -60,8 +60,8 @@ jobs:
           echo "  filesize = '${filesize}';"
           echo "  filename = '${filename}';"
           echo "}"
-          echo $sha1 > output/sha1_base64.sig
-          echo $sha256 > output/sha256.sig
+          echo $sha1 > output/${filename}.sha1.base64.sig
+          echo $sha256 > output/${filename}.sha256.sig
 
       - name: Pushing generated binary rules file
         run: |
