@@ -21,9 +21,6 @@ jobs:
       - name: Cleaning up previously downloaded rules
         run: git rm -r ./downloaded_rules
 
-      - name: Creating folder to store downloaded rules
-        run: mkdir -p ./downloaded_rules/global
-
       - name: Downloading global rules
         run: |
           while IFS= read -r line; do
@@ -33,7 +30,8 @@ jobs:
                   host=$(echo "$line" | awk -F/ '{print $4}')
               fi
               filename=$(basename "$line")
-              destfilename="downloaded_rules/global/${host}_${filename}"
+              mkdir -p "downloaded_rules/global/${host}/"
+              destfilename="downloaded_rules/global/${host}/${filename}"
               wget -O "$destfilename" "$line"
             fi
           done < rules/global.txt
