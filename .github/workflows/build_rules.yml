@@ -36,11 +36,10 @@ jobs:
       - name: Generating LICENSE file
         run: cat licenses/* > output/LICENSE
       
-      - name: Creating component file
+      - name: Generating component file
         run: |
           version=$(date +'%y.%j')
           filename="${version}_subresource_rules.crx3"
-          rm -f output/*.crx3
           cat <<EOF > output/manifest.json
           {
             "manifest_version": 2,
@@ -51,7 +50,19 @@ jobs:
           }
           EOF
           cd output && zip -r "$filename" *
-        
+          filesize=$(stat -c%s "$filename")
+          sha256=$(shasum -a 256 "$filename" | cut -f1 -d' ')
+          sha1=$(python3 generate_sha1_base64_signature.py "$filename")
+          echo "// Configuration for the update server"
+          echo "if (chrome_version >= 115) {"
+          echo "  sha256 = '${sha256}';"
+          echo "  sha1 = '${sha1}';" 
+          echo "  filesize = '${filesize}';"
+          echo "  filename = '${filename}';"
+          echo "}"
+          echo $sha1 > output/sha1_base64.sig
+          echo $sha256 > output/sha256.sig
+
       - name: Pushing generated binary rules file
         run: |
           rm ./concatenated_rules.txt
