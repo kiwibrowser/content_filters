@@ -1,6 +1,6 @@
-  if (version_to_use == '23.7.4.796') {
-    sha256 = '3e5b04cbe37ccb0b26a457b4e1540877991a5b9dc561025e1e79471deb57fa7f';
-    sha1 = 'hwYeg5kE2ZIxEbRRobfiT1Ct80M=';
-    filesize = '712716';
-    filename = '23.7.4.796_subresource_rules.crx3';
+  if (version_to_use == '23.7.4.800') {
+    sha256 = '0a9eed837e592df8afe39a6eaa422f1229794fb80772c1797ea0ea04ad98aed6';
+    sha1 = 'PdFysyRaPzjACkpWDxVCKajKzsM=';
+    filesize = '712799';
+    filename = '23.7.4.800_subresource_rules.crx3';
   }

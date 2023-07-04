@@ -2,6 +2,6 @@
   "manifest_version": 2,
   "name": "Subresource Filtering Rules",
   "ruleset_format": 1,
-  "baserelease": "23.7.4.796",
-  "version": "23.7.4.796"
+  "baserelease": "23.7.4.800",
+  "version": "23.7.4.800"
 }
