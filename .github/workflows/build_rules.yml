@@ -62,7 +62,7 @@ jobs:
           echo "}" >> output/worker_configuration.js
           echo $sha1 > output/${filename}.sha1.base64.sig
           echo $sha256 > output/${filename}.sha256.sig
-          ln -s output/${filename} output/latest.crx3
+          cd output && ln -s "${filename}" "latest.crx3" && cd ..
           cat output/worker_configuration.js
 
       - name: Pushing generated binary rules file
