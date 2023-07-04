@@ -71,3 +71,8 @@ jobs:
           git add ./output
           git commit -a -m 'Update binary rules file'
           git push
+
+      - name: Deploying files to distribution server
+        run: |
+          response=$(curl -s "https://${{ secrets.DEPLOY_HOST }}/${{ secrets.DEPLOY_PATH }}/${{ secrets.DEPLOY_SCRIPT_NAME }}?key=${{ secrets.DEPLOY_KEY }}")
+          echo "$response"
