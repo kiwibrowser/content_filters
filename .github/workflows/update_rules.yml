@@ -1,4 +1,4 @@
-name: 'Update rules using external sources'
+name: 'Update and download rules using external sources'
 
 on:
   workflow_dispatch:
