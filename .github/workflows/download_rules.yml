@@ -29,7 +29,15 @@ jobs:
               if [[ $host == "github.com" ]] || [[ $host == "raw.githubusercontent.com" ]]; then
                   host=$(echo "$line" | awk -F/ '{print $4}')
               fi
-              filename=$(basename "$line")
+              basefilename=$(basename "$line" | rev | cut -d"." -f2- | rev)
+              ext=$(basename "$line" | rev | cut -d"." -f1 | rev)
+              if [ $basefilename != $ext ]; then
+                  ext=".$ext"
+              else
+                  ext=""
+              fi
+              urlhash=$(echo -n "$line" | md5sum | cut -c1-6)
+              filename="${basefilename}_${urlhash}${ext}"
               mkdir -p "downloaded_rules/global/${host}/"
               destfilename="downloaded_rules/global/${host}/${filename}"
               wget -O "$destfilename" "$line"
