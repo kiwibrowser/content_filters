@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       download_updated_rules:
-        description: 'Update rules using external sources'
+        description: 'Update and download rules from external sources'
         required: false
         default: 'false'
 
