@@ -19,6 +19,9 @@ jobs:
       - name: Cleaning up previously downloaded rules
         run: git rm -r ./downloaded_rules
 
+      - name: Creating folder to store downloaded rules
+        run: mkdir -p ./downloaded_rules
+
       - name: Downloading global rules
         run: |
           while IFS= read -r line; do
