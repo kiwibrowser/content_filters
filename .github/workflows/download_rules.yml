@@ -27,7 +27,10 @@ jobs:
                   host=$(echo "$line" | awk -F/ '{print $4}')
               fi
               filename=$(basename "$line")
-              destfilename="downloaded_rules/global/"$host"_"$filename"
+              destfilename="downloaded_rules/global/${host}_${filename}"
               wget -O "$destfilename" "$line"
             fi
           done < rules/global.txt
+
+      - name: List files
+        run: ls -laR
