@@ -53,15 +53,16 @@ jobs:
           filesize=$(stat -c%s "output/${filename}")
           sha256=$(shasum -a 256 "output/${filename}" | cut -f1 -d' ')
           sha1=$(python3 tools/generate_sha1_base64_signature.py "output/${filename}")
-          echo "// Configuration for the update server"
-          echo "if (chrome_version >= 115) {"
-          echo "  sha256 = '${sha256}';"
-          echo "  sha1 = '${sha1}';" 
-          echo "  filesize = '${filesize}';"
-          echo "  filename = '${filename}';"
-          echo "}"
+          echo "// Configuration for the update server" > output/worker_configuration.js
+          echo "if (chrome_version >= 115) {" >> output/worker_configuration.js
+          echo "  sha256 = '${sha256}';" >> output/worker_configuration.js
+          echo "  sha1 = '${sha1}';" >> output/worker_configuration.js
+          echo "  filesize = '${filesize}';" >> output/worker_configuration.js
+          echo "  filename = '${filename}';" >> output/worker_configuration.js
+          echo "}" >> output/worker_configuration.js
           echo $sha1 > output/${filename}.sha1.base64.sig
           echo $sha256 > output/${filename}.sha256.sig
+          cat output/worker_configuration.js
 
       - name: Pushing generated binary rules file
         run: |
