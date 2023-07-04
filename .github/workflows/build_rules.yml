@@ -4,14 +4,14 @@ on:
   workflow_dispatch:
     inputs:
       download_updated_rules:
-        description: 'Download updated rules'
+        description: 'Update rules using external sources'
         required: false
         default: 'false'
 
 jobs:
-  download_rules:
+  update_rules:
     if: ${{ github.event.inputs.download_updated_rules == 'true' }}
-    uses: ./.github/workflows/download_rules.yml
+    uses: ./.github/workflows/update_rules.yml
 
   build_rules:
     # The type of runner that the job will run on
