@@ -55,7 +55,7 @@ jobs:
           filesize=$(stat -c%s "output/${filename}")
           sha256=$(shasum -a 256 "output/${filename}" | cut -f1 -d' ')
           sha1=$(python3 tools/generate_sha1_base64_signature.py "output/${filename}")
-          echo "  if (chrome_version >= 115) {" > output/worker_configuration.js
+          echo "  if (version_to_use == '${version}') {" > output/worker_configuration.js
           echo "    sha256 = '${sha256}';" >> output/worker_configuration.js
           echo "    sha1 = '${sha1}';" >> output/worker_configuration.js
           echo "    filesize = '${filesize}';" >> output/worker_configuration.js
