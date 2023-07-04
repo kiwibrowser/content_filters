@@ -1,0 +1,3 @@
+# Rules applied to all countries
+https://easylist.to/easylist/easylist.txt
+https://easylist.to/easylist/easyprivacy.txt
