@@ -12,4 +12,4 @@ with open(filename, 'rb') as f:
 
 encoded_base64 = base64.b64encode(hash_sha1)
 
-print(encoded_base64)
+print(encoded_base64.decode())
