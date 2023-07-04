@@ -1,4 +1,4 @@
-name: 'Downloading rules from external sources'
+name: 'Download rules from external sources'
 
 on:
   workflow_dispatch:
@@ -16,6 +16,9 @@ jobs:
           git config --global user.email "github@actions"
           git config --global user.name "Repository manager"
           
+      - name: Cleaning up previously downloaded rules
+        run: git rm -r ./downloaded_rules
+
       - name: Downloading global rules
         run: |
           while IFS= read -r line; do
