@@ -1,4 +1,4 @@
-name: 'Build rules from downloaded rules'
+name: 'Build distributable binary rules file from downloaded raw text files'
 
 on:
   workflow_dispatch:
