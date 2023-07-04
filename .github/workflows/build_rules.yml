@@ -19,7 +19,7 @@ jobs:
           git config --global user.name "Repository manager"
       
       - name: Installing crx3-utils
-        run: npm install crx3-utils@0.0.3
+        run: npm -g install crx3-utils@0.0.3
         
       - name: Generate concatenated rules file
         run: find ./downloaded_rules -type f -exec cat {} + > ./concatenated_rules.txt
