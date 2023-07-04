@@ -39,7 +39,7 @@ jobs:
       - name: Creating component file
         run: |
           version=$(date +'%y.%j')
-          filename="$version_subresource_rules.crx3"
+          filename="${version}_subresource_rules.crx3"
           rm -f output/*.crx3
           cat <<EOF > output/manifest.json
           {
