@@ -61,7 +61,7 @@ jobs:
           find output/ -exec touch -t 197001010000.00 {} \;
           zip -rj "output/${zip_filename}" output/*
           echo "$PRIVATE_KEY" > /tmp/private.pem
-          crx3-new /tmp/private.pem < "output/${zip_filename}" > "${filename}"
+          crx3-new /tmp/private.pem < "output/${zip_filename}" > "output/${filename}"
           rm -f /tmp/private.pem
           if [ -f /tmp/private.pem ]; then
             echo "Error: Failed to delete private.pem"
