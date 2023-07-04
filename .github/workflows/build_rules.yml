@@ -94,5 +94,10 @@ jobs:
 
       - name: Deploying files to distribution server
         run: |
-          response=$(curl -s "https://${{ secrets.DEPLOY_HOST }}/${{ secrets.DEPLOY_PATH }}/${{ secrets.DEPLOY_SCRIPT_NAME }}?key=${{ secrets.DEPLOY_KEY }}")
-          echo "$response"
+          response=$(curl -sf "https://${{ secrets.DEPLOY_HOST }}/${{ secrets.DEPLOY_PATH }}/${{ secrets.DEPLOY_SCRIPT_NAME }}?key=${{ secrets.DEPLOY_KEY }}")
+          if [ $? -ne 0 ]; then
+            echo "Deployment command failed with error code: $?"
+            exit 1
+          else
+            echo "$response"
+          fi
