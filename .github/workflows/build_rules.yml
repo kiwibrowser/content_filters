@@ -49,7 +49,7 @@ jobs:
             "version": "$version"
           }
           EOF
-          zip -rj "output/${filename}" output/*
+          cd output && zip -r ${filename} * && cd ..
           filesize=$(stat -c%s "$filename")
           sha256=$(shasum -a 256 "$filename" | cut -f1 -d' ')
           sha1=$(python3 tools/generate_sha1_base64_signature.py "$filename")
