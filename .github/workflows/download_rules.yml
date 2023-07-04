@@ -1,4 +1,4 @@
-name: 'Main: Downloading rules from external sources'
+name: 'Downloading rules from external sources'
 
 on:
   workflow_dispatch:
@@ -10,8 +10,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
       - name: Setting-up GitHub username
         run: |
@@ -32,5 +30,8 @@ jobs:
             fi
           done < rules/global.txt
 
-      - name: List files
-        run: ls -laR
+      - name: Committing newly downloaded files
+        run: |
+          git add ./downloaded_rules
+          git commit -a -m 'Update rules from upstream'
+          git push
