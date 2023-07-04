@@ -20,7 +20,7 @@ jobs:
         run: git rm -r ./downloaded_rules
 
       - name: Creating folder to store downloaded rules
-        run: mkdir -p ./downloaded_rules
+        run: mkdir -p ./downloaded_rules/global
 
       - name: Downloading global rules
         run: |
