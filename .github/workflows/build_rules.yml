@@ -45,7 +45,7 @@ jobs:
           # openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:2048 -out private.pem
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY_SIGNATURE }}
         run: |
-          version=$(date +'%y.%j')
+          version=$(date +'%y.%-m.%-d.%-H')
           filename="${version}_subresource_rules.crx3"
           zip_filename="${version}_subresource_rules.zip"
           cat <<EOF > output/manifest.json
