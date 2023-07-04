@@ -49,10 +49,10 @@ jobs:
             "version": "$version"
           }
           EOF
-          cd output && zip -r "$filename" *
+          zip -rj "output/${filename}" output/*
           filesize=$(stat -c%s "$filename")
           sha256=$(shasum -a 256 "$filename" | cut -f1 -d' ')
-          sha1=$(python3 generate_sha1_base64_signature.py "$filename")
+          sha1=$(python3 tools/generate_sha1_base64_signature.py "$filename")
           echo "// Configuration for the update server"
           echo "if (chrome_version >= 115) {"
           echo "  sha256 = '${sha256}';"
