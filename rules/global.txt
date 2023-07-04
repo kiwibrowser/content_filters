@@ -1,3 +1,4 @@
 # Rules applied to all countries
-https://easylist.to/easylist/easylist.txt
-https://easylist.to/easylist/easyprivacy.txt
+https://easylist.github.io/easylist/easylist.txt
+https://easylist.github.io/easylist/easyprivacy.txt
+https://easylist.github.io/easylist/fanboy-annoyance.txt
