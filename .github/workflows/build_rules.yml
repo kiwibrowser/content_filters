@@ -2,12 +2,21 @@ name: 'Build distributable binary rules file from downloaded raw text files'
 
 on:
   workflow_dispatch:
+    inputs:
+      download_updated_rules:
+        description: 'Download updated rules'
+        required: false
+        default: 'false'
 
 jobs:
+  download_rules:
+    if: ${{ github.event.inputs.download_updated_rules == 'true' }}
+    uses:  ${{ github.repository }}/.github/workflows/download_rules.yml@main
+
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-
+    
     steps:
       - uses: actions/checkout@v2
         with:
