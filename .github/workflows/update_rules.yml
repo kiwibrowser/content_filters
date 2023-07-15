@@ -25,7 +25,7 @@ jobs:
       - name: Downloading global rules
         run: |
           while IFS= read -r line; do
-            if [[ $line != \#* ]]; then
+          if [[ -n $line ]] && [[ $line != \#* ]]; then
               host=$(echo "$line" | awk -F/ '{print $3}')
               if [[ $host == "github.com" ]] || [[ $host == "raw.githubusercontent.com" ]]; then
                   host=$(echo "$line" | awk -F/ '{print $4}')
