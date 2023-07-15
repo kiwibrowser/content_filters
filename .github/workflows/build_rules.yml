@@ -31,7 +31,7 @@ jobs:
         run: npm -g install crx3-utils@0.0.3
         
       - name: Generate concatenated rules file
-        run: find ./downloaded_rules -type f -exec cat {} + > ./concatenated_rules.txt
+        run: find ./downloaded_rules -type f -exec cat {} + | grep -vFi kiwi > ./concatenated_rules.txt
 
       - name: Emptying output folder
         run: git rm -rf ./output/
