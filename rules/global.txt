@@ -2,3 +2,6 @@
 https://easylist.github.io/easylist/easylist.txt
 https://easylist.github.io/easylist/easyprivacy.txt
 https://easylist.github.io/easylist/fanboy-annoyance.txt
+
+# Blocklist, under unlicense license (equivalent of CC-0)
+https://blocklistproject.github.io/Lists/ads.txt
